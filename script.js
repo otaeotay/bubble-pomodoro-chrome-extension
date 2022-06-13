@@ -38,16 +38,19 @@ let start = () => {
     setFocusTime();
   }
   chrome.runtime.sendMessage({ action: 'startTimer', focusTime: focusTime, focusTimeSeconds: focusTimeSeconds})
+  document.getElementById('start-audio').play();
 }
 
 let pause = () => {
   paused = true;
   chrome.runtime.sendMessage({action: 'pauseTimer'});
+  document.getElementById('pause-audio').play();
 }
 
 let stop = () => {
   setFocusTime();
   chrome.runtime.sendMessage({action: 'stopTimer' , focusTime: focusTime, focusTimeSeconds: focusTimeSeconds});
+  document.getElementById('stop-audio').play();
 }
 
 let timer = (minutes, seconds) => {
@@ -65,7 +68,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
 })
 
 function formatTime(x) {
-  return x >= 10 ? x : `0${x}`;
+  return x >= 10 || x==='00' ? x : `0${x}`;
 }
 
 // function hide(element) {

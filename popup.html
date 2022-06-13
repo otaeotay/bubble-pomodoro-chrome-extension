@@ -24,19 +24,20 @@
           </li>
           <li>
             <a href="#">
+              
               <img src="Images/close.svg" class="nav-icons" id="close-button" />
             </a>
           </li>
         </ul>
       </nav>
     </header>
-    <div>
-      <a href='#'><img src='Images/play.svg' id="play-button"></a>
-      <a href='#'><img src='Images/pause.svg' id="pause-button"></a>
-      <a href='#'><img src='Images/stop.svg' id="stop-button"></a>
+    <div id="controls">
+      <a href='#' class='control-button-links'><img src='Images/play-circle.svg' id="play-button" class='control-buttons'></a>
+      <a href='#' class='control-button-links'><img src='Images/pause-circle.svg' id="pause-button" class='control-buttons'></a>
+      <a href='#' class='control-button-links'><img src='Images/stop-circle.svg' id="stop-button" class='control-buttons'></a>
     </div>
     <div id="main">
-      <div id="timer"><span id="minutes">00</span>:<span id="seconds">00</span></div>
+      <div id="timer"><div><span id="minutes">00</span>:<span id="seconds">00</span></div></div>
     </div>
     <div id="timer-settings-container">
       <div class="timer-settings" id="set-focus">FOCUS
@@ -46,6 +47,12 @@
         <input class="timer-settings-input" id='break-time' type="text" value='05:00'  placeholder="05:00" maxlength="5">
       </div>
     </div>
+    <div style='display: none'>
+      <audio src='Sounds/bubbleStart.wav' id = "start-audio"></audio> 
+      <audio src='Sounds/bubblePause.wav' id = "pause-audio"></audio> 
+      <audio src='Sounds/bubbleStop.wav' id = "stop-audio"></audio>   
+    </div>
+    
   </body>
   <script src="script.js"></script>
 </html>

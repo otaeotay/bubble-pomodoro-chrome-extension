@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap');
 
 html {
-  height: 530px;
+  height: 500px;
   --light-blue: #86dfdf;
   --dark-blue: #1a7575;
   --dark-blue-low-opacity: rgba(26, 117, 117, 0.8);
@@ -14,9 +14,8 @@ body {
   font-family: 'Inter', sans-serif;
   /* font-family: 'Roboto', sans-serif; */
   width: 350px;
-  height: 530px;
+  height: 500px;
   background: var(--light-blue);
-  border: solid 1px black;
 }
 
 header {
@@ -33,21 +32,89 @@ header li {
   display: inline-block;
 }
 
+.control-button-links{
+  width: 100px;
+  height: 100px;
+}
+
+.control-buttons{
+  width: 50px;
+  height: 50px;
+}
+
+#play-button{
+  position: fixed;
+  left:150px;
+  top: 70px;
+  animation: 4.5s ease-in-out infinite float-buttons;
+}
+
+#pause-button{
+  position: fixed;
+  left: 30px;
+  top: 80px;
+  animation: 4s 0.5s ease-in-out infinite float-buttons;
+}
+
+#stop-button{
+  position: fixed;
+  top: 80px;
+  right: 30px;
+  animation: 3.5s 0.3s ease-in-out infinite float-buttons;
+}
+
 header img {
   height: 40px;
 }
 
 #main{
   width: 350px;
-  height: 350px;
-  background-image: url(/Images/bubble.svg);
+  height: 300px;
+  margin-top: 30px;
   display: grid;
   place-items: center;
 }
 
+#controls{
+  z-index: 2;
+}
+
 #timer{
-  color: var(--slight-white);
+  background-image: url(/Images/bubble.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 200px;
+  height: 200px;
   font-size: 36px;
+  display: grid;
+  place-items: center;
+  animation: 5s ease-in-out infinite float;
+  color: var(--slight-white);
+}
+
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(6px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-buttons {
+  from {
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(2px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 #bubble {
