@@ -31,13 +31,13 @@ let setBreakTime = () => {
 closeButton.addEventListener('click', () => window.close());
 startButton.addEventListener('click', () => start());
 pauseButton.addEventListener('click', () => pause());
-resetButton.addEventListener('click', () => reset());
+resetButton.addEventListener('click', () => stop());
 
 let start = () => {
   if(!paused){
     setFocusTime();
   }
-  chrome.runtime.sendMessage({ action: 'startTimer', focusTime: focusTime, focusTimeSeconds: focusTimeSeconds, paused: paused})
+  chrome.runtime.sendMessage({ action: 'startTimer', focusTime: focusTime, focusTimeSeconds: focusTimeSeconds})
 }
 
 let pause = () => {
@@ -46,7 +46,8 @@ let pause = () => {
 }
 
 let stop = () => {
-  chrome.runtime.sendMessage({action: 'stopTimer'});
+  setFocusTime();
+  chrome.runtime.sendMessage({action: 'stopTimer' , focusTime: focusTime, focusTimeSeconds: focusTimeSeconds});
 }
 
 let timer = (minutes, seconds) => {
