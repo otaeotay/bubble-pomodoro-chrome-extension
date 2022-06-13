@@ -5,13 +5,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         pauseTimer();
     } else if (request.action == 'stopTimer'){
         stopTimer(request.focusTime, request.focusTimeSeconds);
+    } else if (request.action=='loadTime') {
+        loadTime();
     }
 })
 
 let everySecond;
-let minutes;
-let seconds;
+let minutes = 25;
+let seconds = 0;
 chrome.storage.local.set({paused: false})
+
 let startTimer = (focusTime, focusTimeSeconds) => {
     let paused = chrome.storage.local.get('paused', ({paused})=> {
         if (!paused) {
@@ -20,6 +23,7 @@ let startTimer = (focusTime, focusTimeSeconds) => {
         }
     });
     chrome.storage.local.set({paused: false});
+    pauseTimer();
     everySecond = setInterval(() => {
         
         seconds -= 1;
@@ -42,3 +46,7 @@ let stopTimer = (focusTime, focusTimeSeconds) => {
   seconds = focusTimeSeconds;
   chrome.runtime.sendMessage({ action: 'timer', minutes: minutes, seconds: seconds})
 };
+
+let loadTime = () => {
+    chrome.runtime.sendMessage({ action: 'timer', minutes: minutes, seconds: seconds})
+}

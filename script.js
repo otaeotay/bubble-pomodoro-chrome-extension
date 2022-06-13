@@ -52,9 +52,11 @@ let stop = () => {
 
 let timer = (minutes, seconds) => {
   
-  minutesDisplay.innerText = minutes;
-  secondsDisplay.innerText = seconds;
+  minutesDisplay.innerText = formatTime(minutes);
+  secondsDisplay.innerText = formatTime(seconds);
 };
+
+chrome.runtime.sendMessage({ action: 'loadTime'});
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
   if (request.action == 'timer'){
@@ -62,10 +64,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
   }
 })
 
-// function formatTime(x) {
-//   // return x > 10 ? x : `0${x}`;
-//   return x;
-// }
+function formatTime(x) {
+  return x >= 10 ? x : `0${x}`;
+}
 
 // function hide(element) {
 //     element.classList.remove("active");
