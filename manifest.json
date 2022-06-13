@@ -1,0 +1,23 @@
+{
+  "name": "Text Extension",
+  "version": "1.0.0",
+  "description": "a test extension",
+  "manifest_version": 3,
+  "author": "Tae Hwan Lee",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Text Extension"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens popup.html"
+    }
+  }
+}

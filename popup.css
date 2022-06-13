@@ -1,0 +1,101 @@
+@import url('reset.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap');
+
+html {
+  height: 530px;
+  --light-blue: #86dfdf;
+  --dark-blue: #1a7575;
+  --dark-blue-low-opacity: rgba(26, 117, 117, 0.8);
+  --slight-white: #fdffff;
+  --less-white: #f0fafa;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
+  width: 350px;
+  height: 530px;
+  background: var(--light-blue);
+  border: solid 1px black;
+}
+
+header {
+  height: 60px;
+  border-bottom: solid 3px var(--dark-blue-low-opacity);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+header li {
+  height: 40px;
+  list-style: none;
+  display: inline-block;
+}
+
+header img {
+  height: 40px;
+}
+
+#main{
+  width: 350px;
+  height: 350px;
+  background-image: url(/Images/bubble.svg);
+  display: grid;
+  place-items: center;
+}
+
+#timer{
+  color: var(--slight-white);
+  font-size: 36px;
+}
+
+#bubble {
+}
+
+#timer-settings-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.timer-settings {
+  font-size: 18px;
+  color: var(--dark-blue);
+  width: 140px;
+  height: 80px;
+  border-radius: 25px;
+  border: 2px solid var(--dark-blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.timer-settings-input {
+  font-style: normal;
+  font-size: 24px;
+  text-align: center;
+  background-color: rgba(0,0,0,0);
+  color: var(--less-white);
+  width: 86px;
+  height: 34px;
+  outline: none;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.timer-settings-input::placeholder{
+  color: var(--less-white);
+}
+.timer-settings-input:hover, .timer-settings-input:focus {
+  border: 2px dashed var(--dark-blue);
+}
+
+
+.active {
+  display: flex;
+}
+
+.inactive {
+  display: none;
+}
