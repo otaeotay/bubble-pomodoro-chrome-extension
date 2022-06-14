@@ -1,5 +1,5 @@
 @import url('reset.css');
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Patrick+Hand+SC&family=Roboto&display=swap');
 
 html {
   height: 500px;
@@ -18,9 +18,19 @@ body {
   background: var(--light-blue);
 }
 
+#title {
+  position: fixed;
+  top: 1px;
+  left: 15px;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 48px;
+  color: var(--dark-blue);
+  user-select: none;
+}
+
 header {
   height: 60px;
-  border-bottom: solid 3px var(--dark-blue-low-opacity);
+  border-bottom: solid 2px var(--dark-blue-low-opacity);
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -32,33 +42,33 @@ header li {
   display: inline-block;
 }
 
-.control-button-links{
+.control-button-links {
   width: 100px;
   height: 100px;
 }
 
-.control-buttons{
+.control-buttons {
   width: 50px;
   height: 50px;
 }
 
-#play-button{
+#play-button {
   position: fixed;
-  left:150px;
-  top: 70px;
+  left: 30px;
+  top: 105px;
   animation: 4.5s ease-in-out infinite float-buttons;
 }
 
-#pause-button{
+#pause-button {
   position: fixed;
   left: 30px;
-  top: 80px;
+  top: 105px;
   animation: 4s 0.5s ease-in-out infinite float-buttons;
 }
 
-#stop-button{
+#stop-button {
   position: fixed;
-  top: 80px;
+  top: 105px;
   right: 30px;
   animation: 3.5s 0.3s ease-in-out infinite float-buttons;
 }
@@ -67,7 +77,7 @@ header img {
   height: 40px;
 }
 
-#main{
+#main {
   width: 350px;
   height: 300px;
   margin-top: 30px;
@@ -75,11 +85,11 @@ header img {
   place-items: center;
 }
 
-#controls{
+#controls {
   z-index: 2;
 }
 
-#timer{
+#timer {
   background-image: url(/Images/bubble.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -92,12 +102,11 @@ header img {
   color: var(--slight-white);
 }
 
-
 @keyframes float {
   from {
     transform: translateY(0);
   }
-  50%{
+  50% {
     transform: translateY(6px);
   }
   to {
@@ -109,8 +118,26 @@ header img {
   from {
     transform: translateY(0);
   }
-  50%{
+  50% {
     transform: translateY(2px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-away {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-500px);
+  }
+}
+
+@keyframes float-in {
+  from {
+    transform: translateY(400px);
   }
   to {
     transform: translateY(0);
@@ -142,7 +169,7 @@ header img {
   font-style: normal;
   font-size: 24px;
   text-align: center;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   color: var(--less-white);
   width: 86px;
   height: 34px;
@@ -151,16 +178,16 @@ header img {
   border-radius: 4px;
 }
 
-.timer-settings-input::placeholder{
+.timer-settings-input::placeholder {
   color: var(--less-white);
 }
-.timer-settings-input:hover, .timer-settings-input:focus {
+.timer-settings-input:hover,
+.timer-settings-input:focus {
   border: 2px dashed var(--dark-blue);
 }
 
-
 .active {
-  display: flex;
+  display: block;
 }
 
 .inactive {

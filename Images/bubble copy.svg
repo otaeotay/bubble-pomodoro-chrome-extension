@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 640 640" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" xmlns="http://www.w3.org/2000/svg">
+  <g id="eoAazlIcjEW2" transform="matrix(1.015573, 0, 0, 1.015553, -4.983368, -4.976959)" style="">
+    <ellipse rx="300" ry="300" transform="translate(320 320)" fill="#f1a6a5" stroke-width="0"/>
+    <ellipse rx="290" ry="290" transform="translate(320 320)" fill="#fbcdcc" stroke-width="0"/>
+    <ellipse rx="31.5" ry="48" transform="matrix(.676693-.852691 1.137673 0.902855 181.95048 457.370641)" fill="#fdffff" stroke-width="0"/>
+    <ellipse rx="31.5" ry="48" transform="matrix(.729499 0 0 0.315568 297.020782 542.714709)" fill="#fdffff" stroke-width="0"/>
+  </g>
+</svg>

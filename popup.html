@@ -9,50 +9,99 @@
   </head>
   <body>
     <header>
+      <div id="title">bubble</div>
       <nav>
         <ul>
           <li>
-            <a href="#"><img src="Images/home.svg" class="nav-icons" /></a>
+            <a href="#"
+              ><img src="Images/home.svg" class="nav-icons" id="home-button"
+            /></a>
           </li>
           <li>
-            <a href="#"><img src="Images/settings.svg" class="nav-icons" /></a>
+            <a href="#"
+              ><img
+                src="Images/settings.svg"
+                class="nav-icons"
+                id="settings-button"
+            /></a>
           </li>
           <li>
             <a href="#">
-              <img src="Images/palette.svg" class="nav-icons" id="palette-button" />
+              <img
+                src="Images/palette.svg"
+                class="nav-icons"
+                id="palette-button"
+              />
             </a>
           </li>
           <li>
             <a href="#">
-              
               <img src="Images/close.svg" class="nav-icons" id="close-button" />
             </a>
           </li>
         </ul>
       </nav>
     </header>
-    <div id="controls">
-      <a href='#' class='control-button-links'><img src='Images/play-circle.svg' id="play-button" class='control-buttons'></a>
-      <a href='#' class='control-button-links'><img src='Images/pause-circle.svg' id="pause-button" class='control-buttons'></a>
-      <a href='#' class='control-button-links'><img src='Images/stop-circle.svg' id="stop-button" class='control-buttons'></a>
-    </div>
-    <div id="main">
-      <div id="timer"><div><span id="minutes">00</span>:<span id="seconds">00</span></div></div>
-    </div>
-    <div id="timer-settings-container">
-      <div class="timer-settings" id="set-focus">FOCUS
-        <input class="timer-settings-input" id='focus-time' type="text" value='25:00' placeholder="25:00" maxlength="5">
+    <div id="home" class="active">
+      <div id="controls">
+        <a href="#" class="control-button-links"
+          ><img
+            src="Images/play-circle.svg"
+            id="play-button"
+            class="control-buttons"
+        /></a>
+        <a href="#" class="control-button-links"
+          ><img
+            src="Images/pause-circle.svg"
+            id="pause-button"
+            class="control-buttons inactive"
+        /></a>
+        <a href="#" class="control-button-links"
+          ><img
+            src="Images/stop-circle.svg"
+            id="stop-button"
+            class="control-buttons inactive"
+        /></a>
       </div>
-      <div class="timer-settings" id="set-break">BREAK
-        <input class="timer-settings-input" id='break-time' type="text" value='05:00'  placeholder="05:00" maxlength="5">
+      <div id="main">
+        <div id="timer">
+          <div><span id="minutes">00</span>:<span id="seconds">00</span></div>
+        </div>
+      </div>
+      <div id="timer-settings-container">
+        <div class="timer-settings" id="set-focus">
+          FOCUS
+          <input
+            class="timer-settings-input"
+            id="focus-time"
+            type="text"
+            value="25:00"
+            placeholder="25:00"
+            maxlength="5"
+          />
+        </div>
+        <div class="timer-settings" id="set-break">
+          BREAK
+          <input
+            class="timer-settings-input"
+            id="break-time"
+            type="text"
+            value="05:00"
+            placeholder="05:00"
+            maxlength="5"
+          />
+        </div>
+      </div>
+      <div style="display: none">
+        <audio src="Sounds/bubbleStart.wav" id="start-audio"></audio>
+        <audio src="Sounds/bubblePause.wav" id="pause-audio"></audio>
+        <audio src="Sounds/bubbleStop.wav" id="stop-audio"></audio>
+        <!-- <audio src="Sounds/bubbles.wav" id="completion-audio"></audio> -->
+        <!-- <audio src="Sounds/bubbleBreak.wav" id="break-audio"></audio> -->
       </div>
     </div>
-    <div style='display: none'>
-      <audio src='Sounds/bubbleStart.wav' id = "start-audio"></audio> 
-      <audio src='Sounds/bubblePause.wav' id = "pause-audio"></audio> 
-      <audio src='Sounds/bubbleStop.wav' id = "stop-audio"></audio>   
-    </div>
-    
+    <div id="settings inactive"></div>
+    <div id="colors inactive"></div>
   </body>
   <script src="script.js"></script>
 </html>
