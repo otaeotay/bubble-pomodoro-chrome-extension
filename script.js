@@ -44,6 +44,7 @@ let start = async () => {
   show(pauseButton);
   show(resetButton);
 
+  chrome.storage.local.set({ running: true });
   if (!paused) {
     await setTimes();
   }
@@ -72,6 +73,7 @@ let stop = () => {
   hide(pauseButton);
   hide(resetButton);
   setTimes();
+  chrome.storage.local.set({ running: false });
   chrome.runtime.sendMessage({
     action: 'stopTimer',
     focusTime: focusTime,
@@ -123,3 +125,70 @@ function show(element) {
   // element.classList.add('active');
   element.style.animation = '5s forwards float-in';
 }
+
+function toggleOn(element) {
+  element.classList.remove('inactive');
+  element.classList.add('active');
+}
+
+function toggleOff(element) {
+  element.classList.add('inactive');
+  element.classList.remove('active');
+}
+
+new Promise((resolve, reject) => {
+  chrome.storage.local.get(['paused', 'running'], (currentState) => {
+    if (currentState.paused && currentState.running) {
+      toggleOff(pauseButton);
+      toggleOn(startButton);
+      toggleOn(resetButton);
+      pauseButton.style.animation = '';
+      startButton.style.animation = '';
+      resetButton.style.animation = '';
+    } else if (!currentState.paused && currentState.running) {
+      toggleOff(startButton);
+      toggleOn(pauseButton);
+      toggleOn(resetButton);
+      startButton.style.animation = '';
+      pauseButton.style.animation = '';
+      resetButton.style.animation = '';
+    }
+  });
+  resolve();
+});
+
+// Nav bar
+let homeButton = document.getElementById('home-button');
+let settingsButton = document.getElementById('settings-button');
+let paletteButton = document.getElementById('palette-button');
+let homeElement = document.getElementById('home');
+let settingsElement = document.getElementById('settings');
+let paletteElement = document.getElementById('palette');
+
+homeButton.addEventListener('click', () => home());
+settingsButton.addEventListener('click', () => settings());
+paletteButton.addEventListener('click', () => palette());
+
+let home = () => {
+  if (homeElement.classList.contains('inactive')) {
+    toggle(homeElement);
+    toggle(settingsElement);
+    toggle(paletteElement);
+  }
+};
+
+let settings = () => {
+  if (settingsElement.classList.contains('inactive')) {
+    toggle(homeElement);
+    toggle(settingsElement);
+    toggle(paletteElement);
+  }
+};
+
+let palette = () => {
+  if (paletteElement.classList.contains('inactive')) {
+    toggle(homeElement);
+    toggle(settingsElement);
+    toggle(paletteElement);
+  }
+};

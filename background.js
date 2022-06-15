@@ -27,8 +27,9 @@ let startTimer = (focusTime, focusTimeSeconds, breakTime, breakTimeSeconds) => {
       seconds = focusTimeSeconds;
     }
   });
-  chrome.storage.local.set({ paused: false });
+
   pauseTimer();
+  chrome.storage.local.set({ paused: false });
   everySecond = setInterval(() => {
     seconds -= 1;
     if (seconds < 0) {
