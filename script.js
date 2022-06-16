@@ -138,19 +138,19 @@ function toggleOff(element) {
 new Promise((resolve, reject) => {
   chrome.storage.local.get(['paused', 'running'], (currentState) => {
     if (currentState.paused && currentState.running) {
+      pauseButton.style.animation = '';
+      startButton.style.animation = '';
+      resetButton.style.animation = '';
       toggleOff(pauseButton);
       toggleOn(startButton);
       toggleOn(resetButton);
-      pauseButton.style.animation = '';
-      startButton.style.animation = '';
-      resetButton.style.animation = '';
     } else if (!currentState.paused && currentState.running) {
+      startButton.style.animation = '';
+      pauseButton.style.animation = '';
+      resetButton.style.animation = '';
       toggleOff(startButton);
       toggleOn(pauseButton);
       toggleOn(resetButton);
-      startButton.style.animation = '';
-      pauseButton.style.animation = '';
-      resetButton.style.animation = '';
     }
   });
   resolve();
@@ -192,6 +192,8 @@ let palette = () => {
   }
 };
 
+// Palette/color selection section
+
 let blueButton = document.getElementById('palette-blue');
 let greenButton = document.getElementById('palette-green');
 let orangeButton = document.getElementById('palette-orange');
@@ -204,15 +206,15 @@ blueButton.addEventListener('click', () => {
 });
 greenButton.addEventListener('click', () => {
   greenBubbleChange();
-  document.getElementById('start-audio').play();
+  paletteChange();
 });
 orangeButton.addEventListener('click', () => {
   orangeBubbleChange();
-  document.getElementById('start-audio').play();
+  paletteChange();
 });
 pinkButton.addEventListener('click', () => {
   pinkBubbleChange();
-  document.getElementById('start-audio').play();
+  paletteChange();
 });
 
 let timerElement = document.getElementById('timer');
@@ -234,24 +236,40 @@ let paletteChange = () => {
 };
 
 let blueBubbleChange = () => {
+  blueButton.classList.add('palette-selected');
+  greenButton.classList.remove('palette-selected');
+  orangeButton.classList.remove('palette-selected');
+  pinkButton.classList.remove('palette-selected');
   root.style.setProperty('--button-outer-color', '#5cb9de');
   root.style.setProperty('--button-fill-color', '#9ad8f2');
   chrome.storage.local.set({ theme: 'blue' });
   timerElement.style.backgroundImage = 'url(/Images/bubble-blue.svg)';
 };
 let greenBubbleChange = () => {
+  greenButton.classList.add('palette-selected');
+  blueButton.classList.remove('palette-selected');
+  orangeButton.classList.remove('palette-selected');
+  pinkButton.classList.remove('palette-selected');
   root.style.setProperty('--button-outer-color', '#3b6b39');
   root.style.setProperty('--button-fill-color', '#5bbc57');
   chrome.storage.local.set({ theme: 'green' });
   timerElement.style.backgroundImage = 'url(/Images/bubble-green.svg)';
 };
 let orangeBubbleChange = () => {
+  orangeButton.classList.add('palette-selected');
+  blueButton.classList.remove('palette-selected');
+  greenButton.classList.remove('palette-selected');
+  pinkButton.classList.remove('palette-selected');
   root.style.setProperty('--button-outer-color', '#fba400');
   root.style.setProperty('--button-fill-color', '#ffc978');
   chrome.storage.local.set({ theme: 'orange' });
   timerElement.style.backgroundImage = 'url(/Images/bubble-orange.svg)';
 };
 let pinkBubbleChange = () => {
+  pinkButton.classList.add('palette-selected');
+  blueButton.classList.remove('palette-selected');
+  greenButton.classList.remove('palette-selected');
+  orangeButton.classList.remove('palette-selected');
   root.style.setProperty('--button-outer-color', '#f0a6a5');
   root.style.setProperty('--button-fill-color', '#fbcdcc');
   chrome.storage.local.set({ theme: 'pink' });

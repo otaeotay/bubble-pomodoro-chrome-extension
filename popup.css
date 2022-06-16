@@ -1,5 +1,5 @@
 @import url('reset.css');
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Patrick+Hand+SC&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Patrick+Hand+SC&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 html {
   height: 500px;
@@ -8,6 +8,7 @@ html {
 :root {
   --light-blue: #86dfdf;
   --dark-blue: #1a7575;
+  --less-dark-blue: #7fa3a3;
   --dark-blue-low-opacity: rgba(26, 117, 117, 0.8);
   --slight-white: #fdffff;
   --less-white: #f0fafa;
@@ -228,6 +229,85 @@ header img {
   display: none;
 }
 
+/* settings page */
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #c3e9e9;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--dark-blue);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--dark-blue);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+#settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+  gap: 25px;
+}
+
+.setting-subsection {
+  display: flex;
+  justify-content: space-between;
+  width: 275px;
+  font-size: 14px;
+  color: var(--less-dark-blue);
+  background-color: var(--less-white);
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.setting-subsection-title {
+  font-size: 18px;
+  color: var(--dark-blue);
+}
+
 /* palette page */
 
 #palette-container {
@@ -240,8 +320,15 @@ header img {
 
 .palette-option {
   width: 70px;
+  animation: 4s 0.5s ease-in-out infinite float-buttons;
+  padding: 10px;
 }
 
 .palette-option:hover {
   transform: scale(1.05);
+}
+
+.palette-selected {
+  border: 2px dashed var(--dark-blue);
+  border-radius: 50%;
 }

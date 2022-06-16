@@ -160,7 +160,30 @@
         <audio src="Sounds/paletteClick.wav" id="palette-audio"></audio>
       </div>
     </div>
-    <div id="settings" class="inactive"></div>
+    <div id="settings" class="inactive">
+      <div id="settings-container">
+        <div class="setting-subsection">
+          <div id="sound-setting-description">
+            <div class="setting-subsection-title">Sound</div>
+            <div>Toggle sound on/off</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="setting-subsection">
+          <div>
+            <div class="setting-subsection-title">Notifications</div>
+            <div>Toggle notifications on/off</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
     <div id="palette" class="inactive">
       <div id="palette-container">
         <a href="#" class="palette-options"
