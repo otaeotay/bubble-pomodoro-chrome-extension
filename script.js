@@ -18,7 +18,7 @@ let setTimes = () => {
     if (document.getElementById('focus-time').value.slice(0, 2)) {
       focusTime = document.getElementById('focus-time').value.slice(0, 2);
       focusTimeSeconds = document.getElementById('focus-time').value.slice(3);
-      console.log(focusTimeSeconds);
+      console.log(focusTime);
     } else {
       focusTime = 25;
       focusTimeSeconds = 0;
@@ -69,6 +69,7 @@ let pause = () => {
 };
 
 let stop = () => {
+  paused = false;
   show(startButton);
   hide(pauseButton);
   hide(resetButton);
@@ -116,13 +117,11 @@ function formatTime(x) {
 
 function hide(element) {
   element.classList.remove('active');
-  // element.classList.add('inactive');
   element.style.animation = '5s forwards float-away';
 }
 
 function show(element) {
   element.classList.remove('inactive');
-  // element.classList.add('active');
   element.style.animation = '5s forwards float-in';
 }
 
@@ -171,24 +170,90 @@ paletteButton.addEventListener('click', () => palette());
 
 let home = () => {
   if (homeElement.classList.contains('inactive')) {
-    toggle(homeElement);
-    toggle(settingsElement);
-    toggle(paletteElement);
+    toggleOn(homeElement);
+    toggleOff(settingsElement);
+    toggleOff(paletteElement);
   }
 };
 
 let settings = () => {
   if (settingsElement.classList.contains('inactive')) {
-    toggle(homeElement);
-    toggle(settingsElement);
-    toggle(paletteElement);
+    toggleOff(homeElement);
+    toggleOn(settingsElement);
+    toggleOff(paletteElement);
   }
 };
 
 let palette = () => {
   if (paletteElement.classList.contains('inactive')) {
-    toggle(homeElement);
-    toggle(settingsElement);
-    toggle(paletteElement);
+    toggleOff(homeElement);
+    toggleOff(settingsElement);
+    toggleOn(paletteElement);
   }
+};
+
+let blueButton = document.getElementById('palette-blue');
+let greenButton = document.getElementById('palette-green');
+let orangeButton = document.getElementById('palette-orange');
+let pinkButton = document.getElementById('palette-pink');
+let root = document.querySelector(':root');
+
+blueButton.addEventListener('click', () => {
+  blueBubbleChange();
+  paletteChange();
+});
+greenButton.addEventListener('click', () => {
+  greenBubbleChange();
+  document.getElementById('start-audio').play();
+});
+orangeButton.addEventListener('click', () => {
+  orangeBubbleChange();
+  document.getElementById('start-audio').play();
+});
+pinkButton.addEventListener('click', () => {
+  pinkBubbleChange();
+  document.getElementById('start-audio').play();
+});
+
+let timerElement = document.getElementById('timer');
+
+chrome.storage.local.get('theme', ({ theme }) => {
+  if (theme == 'blue') {
+    blueBubbleChange();
+  } else if (theme == 'green') {
+    greenBubbleChange();
+  } else if (theme == 'orange') {
+    orangeBubbleChange();
+  } else {
+    pinkBubbleChange();
+  }
+});
+
+let paletteChange = () => {
+  document.getElementById('palette-audio').play();
+};
+
+let blueBubbleChange = () => {
+  root.style.setProperty('--button-outer-color', '#5cb9de');
+  root.style.setProperty('--button-fill-color', '#9ad8f2');
+  chrome.storage.local.set({ theme: 'blue' });
+  timerElement.style.backgroundImage = 'url(/Images/bubble-blue.svg)';
+};
+let greenBubbleChange = () => {
+  root.style.setProperty('--button-outer-color', '#3b6b39');
+  root.style.setProperty('--button-fill-color', '#5bbc57');
+  chrome.storage.local.set({ theme: 'green' });
+  timerElement.style.backgroundImage = 'url(/Images/bubble-green.svg)';
+};
+let orangeBubbleChange = () => {
+  root.style.setProperty('--button-outer-color', '#fba400');
+  root.style.setProperty('--button-fill-color', '#ffc978');
+  chrome.storage.local.set({ theme: 'orange' });
+  timerElement.style.backgroundImage = 'url(/Images/bubble-orange.svg)';
+};
+let pinkBubbleChange = () => {
+  root.style.setProperty('--button-outer-color', '#f0a6a5');
+  root.style.setProperty('--button-fill-color', '#fbcdcc');
+  chrome.storage.local.set({ theme: 'pink' });
+  timerElement.style.backgroundImage = 'url(/Images/bubble-pink.svg)';
 };

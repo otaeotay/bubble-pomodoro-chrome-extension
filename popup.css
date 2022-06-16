@@ -3,11 +3,26 @@
 
 html {
   height: 500px;
+}
+
+:root {
   --light-blue: #86dfdf;
   --dark-blue: #1a7575;
   --dark-blue-low-opacity: rgba(26, 117, 117, 0.8);
   --slight-white: #fdffff;
   --less-white: #f0fafa;
+
+  --button-outer-color: #f0a6a5;
+  --button-fill-color: #fbcdcc;
+
+  --dark-pink-palette: #f0a6a5;
+  --light-pink-palette: #fbcdcc;
+  --dark-blue-palette: #5cb9de;
+  --light-blue-palette: #9ad8f2;
+  --dark-green-palette: #3b6b39;
+  --light-green-palette: #5bbc57;
+  --dark-orange-palette: #fba400;
+  --light-orange-palette: #ffc978;
 }
 
 body {
@@ -59,6 +74,15 @@ header li {
 
 .control-buttons:hover {
   width: 55px;
+}
+
+.control-button-outer {
+  color: var(--button-outer-color);
+  fill: var(--button-fill-color);
+}
+
+.control-button-inner {
+  color: var(--less-white);
 }
 
 #play-button {
@@ -216,4 +240,8 @@ header img {
 
 .palette-option {
   width: 70px;
+}
+
+.palette-option:hover {
+  transform: scale(1.05);
 }
