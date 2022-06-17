@@ -87,19 +87,23 @@ let loadTime = () => {
 };
 
 let playSound = (source) => {
-  let url = chrome.runtime.getURL('breakStart.html');
+  chrome.storage.local.get('soundsEnabled', ({ soundsEnabled }) => {
+    if (soundsEnabled) {
+      let url = chrome.runtime.getURL('breakStart.html');
 
-  // set this string dynamically in your code, this is just an example
-  // this will play success.wav at half the volume and close the popup after a second
-  url += `?volume=0.5&src=Sounds/${source}.wav&length=5000`;
+      // set this string dynamically in your code, this is just an example
+      // this will play success.wav at half the volume and close the popup after a second
+      url += `?volume=0.5&src=Sounds/${source}.wav&length=5000`;
 
-  chrome.windows.create({
-    type: 'popup',
-    focused: false,
-    top: 1,
-    left: 1,
-    height: 1,
-    width: 1,
-    url,
+      chrome.windows.create({
+        type: 'popup',
+        focused: false,
+        top: 1,
+        left: 1,
+        height: 1,
+        width: 1,
+        url,
+      });
+    }
   });
 };

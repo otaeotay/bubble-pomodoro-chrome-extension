@@ -55,7 +55,11 @@ let start = async () => {
     breakTime: breakTime,
     breakTimeSeconds: breakTimeSeconds,
   });
-  document.getElementById('start-audio').play();
+  chrome.storage.local.get('soundsEnabled', ({ soundsEnabled }) => {
+    if (soundsEnabled) {
+      document.getElementById('start-audio').play();
+    }
+  });
 };
 
 let pause = () => {
@@ -65,7 +69,11 @@ let pause = () => {
 
   paused = true;
   chrome.runtime.sendMessage({ action: 'pauseTimer' });
-  document.getElementById('pause-audio').play();
+  chrome.storage.local.get('soundsEnabled', ({ soundsEnabled }) => {
+    if (soundsEnabled) {
+      document.getElementById('pause-audio').play();
+    }
+  });
 };
 
 let stop = () => {
@@ -80,7 +88,11 @@ let stop = () => {
     focusTime: focusTime,
     focusTimeSeconds: focusTimeSeconds,
   });
-  document.getElementById('stop-audio').play();
+  chrome.storage.local.get('soundsEnabled', ({ soundsEnabled }) => {
+    if (soundsEnabled) {
+      document.getElementById('stop-audio').play();
+    }
+  });
 };
 
 let timer = (minutes, seconds) => {
@@ -89,11 +101,19 @@ let timer = (minutes, seconds) => {
 };
 
 let completion = () => {
-  document.getElementById('completion-audio').play();
+  chrome.storage.local.get('soundsEnabled', ({ soundsEnabled }) => {
+    if (soundsEnabled) {
+      document.getElementById('completion-audio').play();
+    }
+  });
 };
 
 let breakCompletion = () => {
-  document.getElementById('break-audio').play();
+  chrome.storage.local.get('soundsEnabled', ({ soundsEnabled }) => {
+    if (soundsEnabled) {
+      document.getElementById('break-audio').play();
+    }
+  });
 };
 
 chrome.runtime.sendMessage({ action: 'loadTime' });
@@ -192,7 +212,7 @@ let palette = () => {
   }
 };
 
-// Palette/color selection section
+// ***Palette/color selection section***
 
 let blueButton = document.getElementById('palette-blue');
 let greenButton = document.getElementById('palette-green');
@@ -217,8 +237,10 @@ pinkButton.addEventListener('click', () => {
   paletteChange();
 });
 
+// timerElement is the main bubble element to change color
 let timerElement = document.getElementById('timer');
 
+// Initialize the color when popup opens
 chrome.storage.local.get('theme', ({ theme }) => {
   if (theme == 'blue') {
     blueBubbleChange();
@@ -231,8 +253,13 @@ chrome.storage.local.get('theme', ({ theme }) => {
   }
 });
 
+// onclick effects for changing buttons
 let paletteChange = () => {
-  document.getElementById('palette-audio').play();
+  chrome.storage.local.get('soundsEnabled', ({ soundsEnabled }) => {
+    if (soundsEnabled) {
+      document.getElementById('palette-audio').play();
+    }
+  });
 };
 
 let blueBubbleChange = () => {
@@ -275,3 +302,49 @@ let pinkBubbleChange = () => {
   chrome.storage.local.set({ theme: 'pink' });
   timerElement.style.backgroundImage = 'url(/Images/bubble-pink.svg)';
 };
+
+// ***Settings section***
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason == 'install') {
+    chrome.storage.local.set({ soundsEnabled: true });
+    chrome.storage.local.set({ notificationsEnabled: true });
+  } else if (details.reason == 'update') {
+    chrome.storage.local.set({ soundsEnabled: true });
+    chrome.storage.local.set({ notificationsEnabled: true });
+  }
+});
+
+let soundToggleElement = document.getElementById('sound-toggle');
+let notificationToggleElement = document.getElementById('notification-toggle');
+
+soundToggleElement.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    chrome.storage.local.set({ soundsEnabled: true });
+  } else {
+    chrome.storage.local.set({ soundsEnabled: false });
+  }
+});
+
+notificationToggleElement.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    chrome.storage.local.set({ notificationsEnabled: true });
+  } else {
+    chrome.storage.local.set({ notificationsEnabled: false });
+  }
+});
+// Load state on startup
+chrome.storage.local.get(
+  ['soundsEnabled', 'notificationsEnabled'],
+  (currentState) => {
+    if (currentState.soundsEnabled) {
+      soundToggleElement.checked = true;
+    } else {
+      soundToggleElement.checked = false;
+    }
+    if (currentState.notificationsEnabled) {
+      notificationToggleElement.checked = true;
+    } else {
+      notificationToggleElement.checked = false;
+    }
+  }
+);

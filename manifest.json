@@ -1,7 +1,7 @@
 {
-  "name": "Text Extension",
+  "name": "Bubble",
   "version": "1.0.0",
-  "description": "a test extension",
+  "description": "A pomodoro productivity work timer",
   "manifest_version": 3,
   "author": "Tae Hwan Lee",
   "background": {
