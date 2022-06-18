@@ -318,6 +318,7 @@ let soundToggleElement = document.getElementById('sound-toggle');
 let notificationToggleElement = document.getElementById('notification-toggle');
 
 soundToggleElement.addEventListener('change', (e) => {
+  
   if (e.target.checked) {
     chrome.storage.local.set({ soundsEnabled: true });
   } else {

@@ -87,6 +87,31 @@ let loadTime = () => {
 };
 
 let playSound = (source) => {
+  chrome.storage.local.get(
+    'notificationsEnabled',
+    ({ notificationsEnabled }) => {
+      if (notificationsEnabled) {
+        if (source == 'bubbles') {
+          chrome.notifications.create('FOCUS_COMPLETE', {
+            type: 'basic',
+            iconUrl: 'Images/icon48.png',
+            title: 'Focus Completed',
+            message: 'Breaktime has begun',
+            priority: 2,
+          });
+        } else if (source == 'bubbleBreak') {
+          chrome.notifications.create('BREAK_COMPLETE', {
+            type: 'basic',
+            iconUrl: 'Images/icon48.png',
+            title: 'Break Completed',
+            message: 'Focus time has begun',
+            priority: 2,
+          });
+        }
+      }
+    }
+  );
+
   chrome.storage.local.get('soundsEnabled', ({ soundsEnabled }) => {
     if (soundsEnabled) {
       let url = chrome.runtime.getURL('breakStart.html');
