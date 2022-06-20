@@ -291,6 +291,28 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
+#restore-default {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #c3e9e9;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
+  border: none;
+}
+
+#restore-default:hover {
+  transform: scale(1.05);
+}
+
+#restore-default:active {
+  background-color: var(--dark-blue);
+}
+
 #settings-container {
   display: flex;
   flex-direction: column;

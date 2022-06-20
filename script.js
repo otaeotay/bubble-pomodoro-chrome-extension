@@ -388,8 +388,9 @@ chrome.storage.local.get(
       focusTimeElement.value = currentState.prevFocusTime;
       breakTimeElement.value = currentState.prevBreakTime;
       if (!currentState.running) {
-        minutesDisplay.innerText = focusTimeElement.value.split(':')[0];
-        secondsDisplay.innerText = focusTimeElement.value.split(':')[1];
+        minutesDisplay.innerText = currentState.prevFocusTime.split(':')[0];
+        secondsDisplay.innerText =
+          currentState.prevFocusTime.value.split(':')[1];
       }
     }
   }
