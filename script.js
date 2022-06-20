@@ -56,6 +56,10 @@ let setTimes = () => {
       breakTime = 25;
       breakTimeSeconds = 0;
     }
+    chrome.storage.local.set({
+      prevFocusTime: focusTimeElement.value,
+      prevBreakTime: breakTimeElement.value,
+    });
     resolve();
   });
 };
@@ -361,7 +365,13 @@ notificationToggleElement.addEventListener('change', (e) => {
 });
 // Load state on startup
 chrome.storage.local.get(
-  ['soundsEnabled', 'notificationsEnabled'],
+  [
+    'soundsEnabled',
+    'notificationsEnabled',
+    'prevFocusTime',
+    'prevBreakTime',
+    'running',
+  ],
   (currentState) => {
     if (currentState.soundsEnabled) {
       soundToggleElement.checked = true;
@@ -372,6 +382,15 @@ chrome.storage.local.get(
       notificationToggleElement.checked = true;
     } else {
       notificationToggleElement.checked = false;
+    }
+    //sets timers
+    if (currentState.prevFocusTime) {
+      focusTimeElement.value = currentState.prevFocusTime;
+      breakTimeElement.value = currentState.prevBreakTime;
+      if (!currentState.running) {
+        minutesDisplay.innerText = focusTimeElement.value.split(':')[0];
+        secondsDisplay.innerText = focusTimeElement.value.split(':')[1];
+      }
     }
   }
 );
