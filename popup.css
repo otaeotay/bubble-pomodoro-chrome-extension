@@ -229,6 +229,13 @@ header img {
   display: none;
 }
 
+#time-error {
+  margin-top: 2px;
+  color: var(--dark-blue);
+  display: none;
+  text-align: center;
+}
+
 /* settings page */
 
 .toggle {

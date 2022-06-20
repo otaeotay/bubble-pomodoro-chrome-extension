@@ -26,7 +26,9 @@ let startTimer = (focusTime, focusTimeSeconds, breakTime, breakTimeSeconds) => {
       minutes = focusTime;
       seconds = focusTimeSeconds;
     }
+    console.log(paused);
   });
+  console.log(focusTime);
 
   pauseTimer();
   chrome.storage.local.set({ paused: false });
@@ -68,9 +70,10 @@ let pauseTimer = () => {
 };
 
 let stopTimer = (focusTime, focusTimeSeconds) => {
-  pauseTimer();
+  clearInterval(everySecond);
   minutes = focusTime;
   seconds = focusTimeSeconds;
+
   chrome.runtime.sendMessage({
     action: 'timer',
     minutes: minutes,

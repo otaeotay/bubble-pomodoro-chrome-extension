@@ -5,6 +5,10 @@ let resetButton = document.getElementById('stop-button');
 let minutesDisplay = document.getElementById('minutes');
 let secondsDisplay = document.getElementById('seconds');
 
+let focusTimeElement = document.getElementById('focus-time');
+let breakTimeElement = document.getElementById('break-time');
+let timeError = document.getElementById('time-error');
+
 let focusTime = 25,
   focusTimeSeconds = 0;
 let breakTime = 5,
@@ -13,19 +17,41 @@ let paused = false;
 
 chrome.storage.local.set({ breakTimeStatus: false });
 
+focusTimeElement.addEventListener('input', () => {
+  if (/^([0-9]?[0-9]):[0-9][0-9]$/.test(focusTimeElement.value)) {
+    startButton.style.pointerEvents = '';
+    timeError.style.display = 'none';
+  } else {
+    startButton.style.pointerEvents = 'none';
+    timeError.style.display = 'block';
+  }
+});
+
+breakTimeElement.addEventListener('input', () => {
+  if (/^([0-1]?[0-9]|2[0-3]):[0-9][0-9]$/.test(breakTimeElement.value)) {
+    startButton.style.pointerEvents = '';
+    timeError.style.display = 'none';
+  } else {
+    startButton.style.pointerEvents = 'none';
+    timeError.style.display = 'block';
+  }
+});
+
 let setTimes = () => {
   return new Promise((resolve, reject) => {
-    if (document.getElementById('focus-time').value.slice(0, 2)) {
-      focusTime = document.getElementById('focus-time').value.slice(0, 2);
-      focusTimeSeconds = document.getElementById('focus-time').value.slice(3);
+    focusTimeElement = document.getElementById('focus-time');
+    breakTimeElement = document.getElementById('break-time');
+    if (focusTimeElement.value.slice(0, 2)) {
+      focusTime = focusTimeElement.value.split(':')[0];
+      focusTimeSeconds = focusTimeElement.value.split(':')[1];
       console.log(focusTime);
     } else {
       focusTime = 25;
       focusTimeSeconds = 0;
     }
-    if (document.getElementById('break-time').value.slice(0, 2)) {
-      breakTime = document.getElementById('break-time').value.slice(0, 2);
-      breakTimeSeconds = document.getElementById('break-time').value.slice(3);
+    if (breakTimeElement.value.slice(0, 2)) {
+      breakTime = breakTimeElement.value.split(':')[0];
+      breakTimeSeconds = breakTimeElement.value.split(':')[1];
     } else {
       breakTime = 25;
       breakTimeSeconds = 0;
@@ -47,6 +73,7 @@ let start = async () => {
   chrome.storage.local.set({ running: true });
   if (!paused) {
     await setTimes();
+    // stop();
   }
   chrome.runtime.sendMessage({
     action: 'startTimer',
@@ -318,7 +345,6 @@ let soundToggleElement = document.getElementById('sound-toggle');
 let notificationToggleElement = document.getElementById('notification-toggle');
 
 soundToggleElement.addEventListener('change', (e) => {
-  
   if (e.target.checked) {
     chrome.storage.local.set({ soundsEnabled: true });
   } else {
@@ -349,3 +375,10 @@ chrome.storage.local.get(
     }
   }
 );
+
+const img = document.querySelectorAll('img');
+img.forEach((e) => {
+  e.ondragstart = () => {
+    return false;
+  };
+});
