@@ -11,3 +11,4 @@ State management saved with chrome.storage API
 
 *Not available on the Chrome web store yet!*
 
+![bubble preview](/Images/preview1.png)
