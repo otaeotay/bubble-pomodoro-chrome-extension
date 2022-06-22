@@ -1,7 +1,7 @@
 {
   "name": "Bubble",
-  "version": "1.0.0",
-  "description": "A pomodoro productivity work timer",
+  "version": "0.0.1",
+  "description": "A pomodoro productivity work timer - Stay focused!",
   "manifest_version": 3,
   "author": "Tae Hwan Lee",
   "background": {
